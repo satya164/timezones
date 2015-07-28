@@ -81,6 +81,10 @@ document.addEventListener("readystatechange", function() {
 
         reRender();
 
+        if (!Array.isArray(timezones)) {
+            timezones = [];
+        }
+
         form.addEventListener("submit", function(e) {
             var name, zone, item;
 
