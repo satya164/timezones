@@ -1,0 +1,122 @@
+/* set the viewport properties (limited browser support) */
+@viewport {
+    width: device-width;
+    user-zoom: fixed;
+    zoom: 1;
+    min-zoom: 1;
+    max-zoom: 1;
+}
+
+/* set box sizing to a more natural layout */
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+/* remove tap highlight in webkit */
+* { -webkit-tap-highlight-color: transparent; }
+
+html {
+    /* set default font family to sans-serif */
+    font-family: sans-serif;
+    /* remove iOS text size adjust without disabling user zoom */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /* eliminate 300ms click delay */
+    -ms-touch-action: manipulation; /* IE10 */
+    touch-action: manipulation; /* IE11 */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    font: 14px/1.625 "Open Sans", "Roboto Regular", Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.row:before, .row:after {
+    content: "";
+    display: table;
+}
+
+.row:after { clear: both; }
+
+.col { float: left; }
+
+.col-1 { width: 16.67%; }
+
+.col-2 { width: 33.33%; }
+
+.col-3 { width: 50%; }
+
+.col-4 { width: 66.67%; }
+
+.col-5 { width: 83.33%; }
+
+.col-6 { width: 100%; }
+
+.timezone-info {
+    background-color: #fff;
+    color: #555;
+    box-shadow: 0 .5px 1.5px rgba(0,0,0,.16);
+    max-width: 100%;
+    width: 24em;
+    margin: 3em auto;
+    border-radius: 2px;
+}
+
+.timezone-info .row { border-bottom: 1px solid rgba(0,0,0,.06); }
+
+.timezone-info .item { padding: 1em 2em; }
+
+.timezone-info .item:last-of-type { text-align: right; }
+
+.add-button {
+    font-size: .9em;
+    background-color: transparent;
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #e91e63;
+    float: right;
+}
+
+.add-button:hover { background-color: rgba(0,0,0,.03); }
+
+.add-button:active { background-color: rgba(0,0,0,.06); }
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    font-size: 1em;
+    padding: 1em;
+    border: 0;
+}
+
+input:focus { outline: 0; }
+
+.add-input:focus {
+    box-shadow: inset 0 0 0 1px #e91e63;
+}
+
+.add-input:last-of-type { text-align: right; }
+
+.add-input:not(:last-of-type) {
+    border-right: 1px solid rgba(0,0,0,.06);
+}
+
+.validity-info {
+    width: 24em;
+    margin: auto;
+    text-align: center;
+    color: #ff5722;
+}
