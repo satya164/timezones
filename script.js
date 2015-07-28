@@ -38,6 +38,34 @@ document.addEventListener("readystatechange", function() {
         return row;
     }
 
+    function reRender() {
+        var map = {}, name;
+
+        content.innerHTML = "";
+
+        if (!Array.isArray(timezones)) {
+            return;
+        }
+
+        for (var i = 0, l = timezones.length; i < l; i++) {
+            if (map[timezones[i].zone]) {
+                name = Array.isArray(map[timezones[i].zone].name) ? map[timezones[i].zone].name : [ map[timezones[i].zone].name ];
+
+                if (name.indexOf(timezones[i].name) === -1) {
+                    name.push(timezones[i].name);
+                }
+
+                map[timezones[i].zone].name = name;
+            } else {
+                map[timezones[i].zone] = timezones[i];
+            }
+        }
+
+        for (var item in map) {
+            content.appendChild(buildRow(map[item]));
+        }
+    }
+
     if (document.readyState === "complete") {
         form = document.getElementsByClassName("timezone-add-form")[0];
         content = document.getElementsByClassName("timezone-info-content")[0];
@@ -51,13 +79,7 @@ document.addEventListener("readystatechange", function() {
             timezones = [];
         }
 
-        if (!Array.isArray(timezones)) {
-            timezones = [];
-        }
-
-        timezones.forEach(function(item) {
-            content.appendChild(buildRow(item));
-        });
+        reRender();
 
         form.addEventListener("submit", function(e) {
             var name, zone, item;
@@ -73,7 +95,7 @@ document.addEventListener("readystatechange", function() {
                 return;
             }
 
-            if (zone && /(UTC|GMT)\s?(\+|\-)\s?\d{1,2}\s?(:|\.)\s?\d{1,2}/.test(zone)) {
+            if (zone && /(UTC|GMT)\s?(\+|\-)\s?\d{1,2}\s?(:|\.)\s?\d{1,2}/i.test(zone)) {
                 zone = parseFloat(zone.replace(/\s/g, "").replace(":", ".").replace(/^[^\d]+/, ""));
 
                 if (isNaN(zone)) {
@@ -92,7 +114,8 @@ document.addEventListener("readystatechange", function() {
             item = { name: name, zone: zone };
 
             timezones.push(item);
-            content.appendChild(buildRow(item));
+
+            reRender();
 
             nameEntry.value = "";
             zoneEntry.value = "";

@@ -76,7 +76,10 @@ body {
 
 .timezone-info .item { padding: 1em 2em; }
 
-.timezone-info .item:last-of-type { text-align: right; }
+.timezone-info .item:last-of-type {
+    text-align: right;
+    font-weight: bold;
+}
 
 .add-button {
     font-size: .9em;
